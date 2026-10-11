@@ -1,0 +1,62 @@
+[
+  {
+    "week": 3, "date": "10/13", "gm": "AI Vibecoding Workshop", "speaker": "Jakob",
+    "goal": "Get SnapSnipe running and make it yours",
+    "issues": [
+      {"title": "Fork the repo and run the starter app", "body": "1. Click **Fork** on the club repo.\n2. Open `notebooks/00_run_app.ipynb` in Colab (use the badge in the README).\n3. Put your GitHub username in the first cell and run every cell.\n4. Open the `gradio.live` link and upload any photo.\n\n**Done when:** the app shows a guess for your photo. (It already works with zero training — it uses CLIP, a model that understands both images and words.)"},
+      {"title": "Pick your 3–5 categories", "body": "Edit `config.py` on GitHub (pencil icon) and change `CATEGORIES`.\n\nTips: pick things that *look* different (pizza vs. salad is easier than two kinds of pasta). Ideas: dining hall food, campus spots, sneakers, dogs on campus.\n\n**Done when:** your app guesses between *your* categories."},
+      {"title": "Vibecode your app's look", "body": "Paste `app.py` into an AI assistant and ask it to change things. Prompt ideas:\n- \"Change the title and description to match my categories\"\n- \"Add a soft theme and an emoji to each label\"\n- \"Add 3 example images people can click\"\n\nRe-run the notebook to see your changes.\n\n**Done when:** the app looks like *your* project, not the starter."},
+      {"title": "Start your photo collection (20+ per category)", "body": "Take or find at least 20 photos per category. On GitHub go to `data/raw/`, **Add file → Upload files**, and upload into a folder named exactly like the category (e.g. `data/raw/pizza/`).\n\n**Done when:** every category has 20+ photos."}
+    ]
+  },
+  {
+    "week": 4, "date": "10/20", "gm": "Project Management / Kanban / PRs", "speaker": "Clement",
+    "goal": "Run it like a real software project",
+    "issues": [
+      {"title": "Set up your project board", "body": "On your fork: **Projects → New project → Board**. Make columns `Backlog`, `To do`, `In progress`, `Done`. Turn each of this week's tasks into an Issue and add it to the board.\n\n**Done when:** your board has cards and you've moved at least one to Done."},
+      {"title": "Grow your dataset to 40+ photos per category (via a PR)", "body": "Create a branch called `add-photos`, upload the new photos there, then open a Pull Request into your own `main` and merge it. Link the issue in the PR description with `Closes #<issue number>`.\n\n**Done when:** the PR is merged and the issue closed itself."},
+      {"title": "Write a dataset card", "body": "Fill in `data/README.md` (template is already there): what each category is, where photos came from, how many, and any weird edge cases. Submit it as a PR.\n\n**Done when:** `data/README.md` is filled in on `main`."},
+      {"title": "Review a friend's PR", "body": "Swap fork links with someone at the GM. Leave one helpful comment on one of their PRs (a question, a suggestion, or a 🔥).\n\n**Done when:** you've left a review."}
+    ]
+  },
+  {
+    "week": 5, "date": "10/27", "gm": "Data Analytics", "speaker": "Diego",
+    "goal": "Know your data before you train on it",
+    "issues": [
+      {"title": "Run the data exploration notebook", "body": "Open `notebooks/01_explore_data.ipynb` in Colab and run it. It charts photos per category, image sizes, brightness, and shows a sample grid.\n\n**Done when:** you've got the charts for your dataset."},
+      {"title": "Clean up bad photos", "body": "Use the notebook's **Problems** section: tiny images, exact duplicates, very dark/bright photos. Delete or replace them on GitHub.\n\n**Done when:** the problems section prints no warnings (or you've decided why a flagged photo is fine)."},
+      {"title": "Balance your categories", "body": "No category should have more than ~2× the photos of another. Add photos to the small ones (better) or remove from the big ones.\n\n**Done when:** the notebook's balance check passes."},
+      {"title": "Write 3 data insights", "body": "Add a `## Dataset insights` section to `data/README.md` with 3 things you noticed (e.g. \"most salad photos are from above\", \"campus-spot photos are all daytime\").\n\n**Done when:** 3 insights are on `main`."}
+    ]
+  },
+  {
+    "week": 6, "date": "11/2", "gm": "Classical ML", "speaker": "Jakob",
+    "goal": "Train your own classifier and find its mistakes",
+    "issues": [
+      {"title": "Train your classifier", "body": "Run `notebooks/02_train_model.ipynb`. It turns every photo into 512 numbers with CLIP (that's the *transfer learning* part — reusing a model someone else trained) and then fits a **logistic regression** on those numbers (the classical ML part).\n\n**Done when:** the notebook prints your accuracy."},
+      {"title": "Beat the baseline", "body": "The notebook compares 3 models: zero-shot CLIP (no training), k-nearest neighbors, and logistic regression. Put the results table in your README.\n\n**Done when:** your README has a results table."},
+      {"title": "Hunt down your model's mistakes", "body": "Look at the confusion matrix and the grid of wrong guesses. For each mistake, write one line on *why* you think it happened (bad photo? two categories look alike? weird angle?).\n\n**Done when:** you've written up every mistake (or your top 5)."},
+      {"title": "Fix one mistake, retrain, and save model.joblib", "body": "Pick your most common mistake and fix the data (add photos of the confused category, remove mislabeled ones). Retrain, download `model.joblib`, and upload it to the root of your repo.\n\n**Marketing bonus:** write your headline stat like a product launch, e.g. *\"SnapSnipe tells a Carrillo burrito from a DLG burrito 92% of the time.\"*\n\n**Done when:** `model.joblib` is in your repo and the app uses it."}
+    ]
+  },
+  {
+    "week": 7, "date": "11/9", "gm": "Deployment Workshop", "speaker": "Clement",
+    "goal": "Ship it with a link anyone can open",
+    "issues": [
+      {"title": "Create a Hugging Face Space", "body": "Make a free account at huggingface.co → **New Space** → SDK: **Gradio**, hardware: **CPU basic (free)**.\n\n**Done when:** your empty Space exists."},
+      {"title": "Upload your app to the Space", "body": "Upload these files from your repo: `app.py`, `config.py`, `model_utils.py`, `requirements.txt`, `model.joblib`. The Space builds automatically (~3–5 min).\n\n**Done when:** the Space shows your app."},
+      {"title": "Test it on your phone and fix any build errors", "body": "Open the Space on your phone and snap a real photo. If the build failed, open the **Logs** tab, paste the error into an AI assistant, fix, and re-upload.\n\n**Done when:** a phone photo gets a correct guess."},
+      {"title": "Send the link to 3 friends", "body": "Ask them to try to *break* it. Write down every wrong guess in a new issue.\n\n**Done when:** you have feedback from 3 people."}
+    ]
+  },
+  {
+    "week": 8, "date": "11/16", "gm": "How to Talk About Your Own Project", "speaker": "Sid",
+    "goal": "Show it off",
+    "issues": [
+      {"title": "Polish your README", "body": "Fill in every section of the README's **Showcase** template: problem, live demo link, how it works, results, what you'd do next.\n\n**Done when:** a stranger could understand your project from the README alone."},
+      {"title": "Record a 30-second demo", "body": "Screen-record yourself using the app on your phone (one right guess, one funny wrong one). Add it to the README as a GIF or video link.\n\n**Done when:** the demo is in the README."},
+      {"title": "Write your resume bullet and 60-second pitch", "body": "Formula: *Built [what] using [tools] that [result with a number].* Example: \"Built and deployed an image classifier web app (CLIP + scikit-learn + Gradio) that identifies 4 campus dining dishes with 92% accuracy.\"\n\n**Done when:** both are in your README's Showcase section."},
+      {"title": "Share it", "body": "Present at the GM, post on LinkedIn, or both. Tag the club!\n\n**Done when:** someone outside the club has seen it."}
+    ]
+  }
+]
